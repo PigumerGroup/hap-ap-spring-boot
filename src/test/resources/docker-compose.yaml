@@ -1,0 +1,16 @@
+version: "3.1"
+services:
+  haproxy:
+    image: pigumergroup/haproxy
+    restart: always
+    volumes:
+      - ./etc/haproxy:/usr/local/etc/haproxy
+    ports:
+      - 80
+      - 5555
+    environment:
+      HOST: 0.0.0.0
+      HAPROXY_DATAPLANEAPI_MAPS_DIR: /usr/local/etc/haproxy/maps
+      HAPROXY_DATAPLANEAPI_TRANSACTION_DIR: /usr/local/etc/haproxy/tmp
+    extra_hosts:
+      - "demo:${DOCKER_IP}"
